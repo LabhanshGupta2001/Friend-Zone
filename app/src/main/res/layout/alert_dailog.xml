@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/alert"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_selectProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            app:cardElevation="0dp"
+            android:layout_margin="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/_16sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:cardBackgroundColor="#8AE3E3E3">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_select_profile" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/_4sdp"
+            android:gravity="center_vertical"
+            android:text="Selet Profile Picture"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_viewProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            app:cardElevation="0dp"
+            android:layout_margin="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/_16sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:cardBackgroundColor="#8AE3E3E3">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_see_prifile" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/_4sdp"
+            android:gravity="center_vertical"
+            android:text="View Profile Picture"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height=".1dp"
+        android:background="#D1D1D1">
+
+    </View>
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:gravity="center"
+        android:text="cancel"
+        android:textColor="@color/green"
+        android:textSize="@dimen/_12ssp" />
+
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/addStoryImg"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:visibility="gone"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/gradient"
+        android:alpha="0.9"
+        android:src="@drawable/profile1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:riv_corner_radius="5dip" />
+    <VideoView
+        android:id="@+id/vv_video"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="180dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        />
+
+</LinearLayout>
