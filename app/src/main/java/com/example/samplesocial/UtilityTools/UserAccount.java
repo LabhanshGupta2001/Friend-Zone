@@ -5,7 +5,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.enwdtech.sawit.R;
+
+import com.example.samplesocial.R;
 import com.google.firebase.database.annotations.NotNull;
 
 

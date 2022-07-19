@@ -2,7 +2,8 @@ package com.example.samplesocial.database;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.enwdtech.sawit.UtilityTools.Utils;
+
+import com.example.samplesocial.UtilityTools.Utils;
 
 import java.io.Serializable;
 
