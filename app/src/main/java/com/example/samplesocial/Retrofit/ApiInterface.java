@@ -1,3 +1,4 @@
+/*
 package com.example.samplesocial.Retrofit;
 
 
@@ -45,9 +46,11 @@ import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+*/
 /**
  * Created by kanchan 21/08/2020.
- */
+ *//*
+
 
 public interface ApiInterface {
 
@@ -186,3 +189,4 @@ public interface ApiInterface {
     @POST(Constant.userSupportApi)
     Call<CommonResponseModel> contactUs(@Header(Constant.Authorization)String token, @FieldMap HashMap<String, String> hm);
 }
+*/

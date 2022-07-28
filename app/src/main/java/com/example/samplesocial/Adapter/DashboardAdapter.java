@@ -1,6 +1,9 @@
 package com.example.samplesocial.Adapter;
 
+import static com.example.samplesocial.R.drawable.ic_play;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.samplesocial.DoubleClickListener;
 import com.example.samplesocial.Models.UploadPostModel;
 import com.example.samplesocial.R;
+import com.example.samplesocial.UtilityTools.Utils;
+import com.example.samplesocial.activity.UserProfile;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
@@ -53,16 +58,48 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.view
             holder.comment.setText(model.comment);
             holder.share.setText(model.share);
         } else {
-            holder.videoView.setVisibility(View.VISIBLE);
-            holder.videoView.setVideoPath(model.uri);
-//            holder.videoView.start();
             Picasso.get().load(model.userProfile).into(holder.profile);
+//            holder.videoView.setVisibility(View.VISIBLE);
+            holder.videoView.setVideoPath(model.uri);
+            holder.dashImg.setImageResource(ic_play);
+            holder.dashImg.setBackgroundResource(ic_play);
+            holder.dashImg.setScaleType(ImageView.ScaleType.FIT_XY);
             holder.name.setText(model.user_name);
             holder.bio.setText(model.content);
             holder.like.setText(model.like);
             holder.comment.setText(model.comment);
             holder.share.setText(model.share);
         }
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("name", model.user_name);
+                bundle.putString("userId", model.userId);
+                bundle.putString("profile", model.userProfile);
+                Utils.I(context, UserProfile.class, bundle);
+            }
+        });
+        holder.bio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("name", model.user_name);
+                bundle.putString("userId", model.userId);
+                bundle.putString("profile", model.userProfile);
+                Utils.I(context, UserProfile.class, bundle);
+            }
+        });
+        holder.profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("name", model.user_name);
+                bundle.putString("userId", model.userId);
+                bundle.putString("profile", model.userProfile);
+                Utils.I(context, UserProfile.class, bundle);
+            }
+        });
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +130,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.view
             public void onSingleClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
                 bottomSheetDialog.setContentView(R.layout.see_profile);
-                VideoView video= (VideoView)bottomSheetDialog.findViewById(R.id.vv_video);
+                VideoView video = (VideoView) bottomSheetDialog.findViewById(R.id.vv_video);
                 video.setVideoPath(model.uri);
                 video.start();
                 video.setVisibility(View.VISIBLE);
@@ -120,11 +157,21 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.view
         holder.dashImg.setOnClickListener(new DoubleClickListener() {
             @Override
             public void onSingleClick(View v) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
-                bottomSheetDialog.setContentView(R.layout.see_profile);
-                Picasso.get().load(model.uri).into((ImageView) bottomSheetDialog.findViewById(R.id.image));
-                bottomSheetDialog.show();
+                if (model.media_text.equals("1")) {
 
+                    BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                    bottomSheetDialog.setContentView(R.layout.see_profile);
+                    Picasso.get().load(model.uri).into((ImageView) bottomSheetDialog.findViewById(R.id.image));
+                    bottomSheetDialog.show();
+                } else {
+                    BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+                    bottomSheetDialog.setContentView(R.layout.see_profile);
+                    VideoView video = (VideoView) bottomSheetDialog.findViewById(R.id.vv_video);
+                    video.setVideoPath(model.uri);
+                    video.start();
+                    video.setVisibility(View.VISIBLE);
+                    bottomSheetDialog.show();
+                }
             }
 
             @Override

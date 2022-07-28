@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     ActivityMainBinding binding;
+    FragmentTransaction transaction;
+
+
+
+    private void change() {
+        transaction.replace(R.id.content, new ChatsFragment());
+        binding.toolbar.setVisibility(View.GONE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+         transaction = getSupportFragmentManager().beginTransaction();
         binding.toolbar.setVisibility(View.GONE);
         transaction.replace(R.id.content, new HomeFragment());
         transaction.commit();
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int i) {
 
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction = getSupportFragmentManager().beginTransaction();
                 switch (i) {
                     case 0:
                         binding.toolbar.setVisibility(View.GONE);
@@ -87,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item, menu);
@@ -97,9 +103,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.setting:
-                Toast.makeText(this, "Setting Clicked", Toast.LENGTH_SHORT).show();
-                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

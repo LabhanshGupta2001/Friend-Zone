@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.samplesocial">
 
     <application
@@ -11,6 +10,9 @@
         android:screenOrientation="sensorLandscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.SampleSocial">
+        <activity
+            android:name=".activity.UserProfile"
+            android:exported="false" />
         <activity
             android:name=".activity.YourPosts"
             android:exported="false" />
@@ -27,12 +29,13 @@
             android:name=".activity.chatScreen"
             android:exported="false" />
         <activity android:name=".activity.MainActivity" />
+
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.StoryActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.SignupActivity"
             android:exported="false" />

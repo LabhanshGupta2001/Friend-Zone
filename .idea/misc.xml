@@ -25,18 +25,22 @@
         <entry key="..\:/Social Media App/app/src/main/res/drawable/ic_google.xml" value="0.1" />
         <entry key="..\:/Social Media App/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Social Media App/app/src/main/res/drawable/ic_notification.xml" value="0.1785" />
+        <entry key="..\:/Social Media App/app/src/main/res/drawable/ic_play.xml" value="0.124" />
         <entry key="..\:/Social Media App/app/src/main/res/drawable/ic_splashscereen.xml" value="0.1285" />
         <entry key="..\:/Social Media App/app/src/main/res/drawable/ic_video_camera.xml" value="0.1815" />
         <entry key="..\:/Social Media App/app/src/main/res/layout-v28/fragment_add_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/Social Media App/app/src/main/res/layout-v28/progress_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_chat_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_signup.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_splash_screen.xml" value="0.14814814814814814" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_story.xml" value="0.19010416666666666" />
+        <entry key="..\:/Social Media App/app/src/main/res/layout/activity_user_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/activity_your_posts.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/alert_dailog.xml" value="0.22" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/bottom_sheetaddphoto.xml" value="0.18" />
+        <entry key="..\:/Social Media App/app/src/main/res/layout/bottomsheet_addstory.xml" value="0.19895833333333332" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/bottomshetAddPhoto.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/dashboard_rv_design.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/fragment_add_post.xml" value="0.20416666666666666" />
@@ -49,6 +53,8 @@
         <entry key="..\:/Social Media App/app/src/main/res/layout/friends_rv_design.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/item_chats.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/item_container_receive_message.xml" value="0.20416666666666666" />
+        <entry key="..\:/Social Media App/app/src/main/res/layout/notification_rv_design.xml" value="0.20416666666666666" />
+        <entry key="..\:/Social Media App/app/src/main/res/layout/progress_dialog.xml" value="0.203125" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/sample.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/see_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Social Media App/app/src/main/res/layout/story_rv_design.xml" value="0.5" />

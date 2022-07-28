@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 
 package com.example.samplesocial.UtilityTools;
 
@@ -27,12 +28,14 @@ import com.pedro.rtmp.utils.ConnectCheckerRtmp;
 
 import java.nio.ByteBuffer;
 
+*/
 /**
  * More documentation see:
  * {@link com.pedro.rtplibrary.base.Camera1Base}
  *
  * Created by pedro on 25/01/17.
- */
+ *//*
+
 
 public class MultiStreamCamera extends Camera1Base {
 
@@ -49,11 +52,13 @@ public class MultiStreamCamera extends Camera1Base {
 
 
 
-  /**
+  */
+/**
    * H264 profile.
    *
    * @param profileIop Could be ProfileIop.BASELINE or ProfileIop.CONSTRAINED
-   */
+   *//*
+
   public void setProfileIop(ProfileIop profileIop) {
 
     rtmpClient.setProfileIop(profileIop);
@@ -121,19 +126,22 @@ public class MultiStreamCamera extends Camera1Base {
     rtmpClient1.setAuthorization(user1, password1);
   }
 
-  /**
+  */
+/**
    * Some Livestream hosts use Akamai auth that requires RTMP packets to be sent with increasing
    * timestamp order regardless of packet type.
    * Necessary with Servers like Dacast.
    * More info here:
    * https://learn.akamai.com/en-us/webhelp/media-services-live/media-services-live-encoder-compatibility-testing-and-qualification-guide-v4.0/GUID-F941C88B-9128-4BF4-A81B-C2E5CFD35BBF.html
-   */
+   *//*
+
   public void forceAkamaiTs(boolean enabled) {
     rtmpClient.forceAkamaiTs(enabled);
     rtmpClient1.forceAkamaiTs(enabled);
   }
 
-  /**
+  */
+/**
    * Must be called before start stream.
    *
    * Default value 128
@@ -142,7 +150,8 @@ public class MultiStreamCamera extends Camera1Base {
    * The most common values example: 128, 4096, 65535
    *
    * @param chunkSize packet's chunk size send to server
-   */
+   *//*
+
   public void setWriteChunkSize(int chunkSize) {
     if (!isStreaming()) {
       rtmpClient.setWriteChunkSize(chunkSize);
@@ -180,8 +189,10 @@ public class MultiStreamCamera extends Camera1Base {
 
   @Override
   protected void stopStreamRtp() {
-   /* rtmpClient.disconnect();
-    rtmpClient1.disconnect();*/
+   */
+/* rtmpClient.disconnect();
+    rtmpClient1.disconnect();*//*
+
   }
 
   @Override
@@ -244,3 +255,4 @@ public class MultiStreamCamera extends Camera1Base {
   }
 }
 
+*/

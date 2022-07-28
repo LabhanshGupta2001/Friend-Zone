@@ -9,6 +9,8 @@
     <color name="greyTrans">#6A000000</color>
     <color name="greyTrans1">#92000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_blue">#1998E8</color>
+    <color name="dark_blue_color">#000F24</color>
     <color name="lightGrey">#D3D3D3</color>
     <color name="grey">#F6F2F2</color>
     <color name="derkGrey">#7C7B7B</color>

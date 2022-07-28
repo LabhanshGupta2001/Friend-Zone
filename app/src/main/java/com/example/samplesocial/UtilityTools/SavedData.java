@@ -3,7 +3,8 @@ package com.example.samplesocial.UtilityTools;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.enwdtech.sawit.Retrofit.Constant;
+import com.example.samplesocial.Retrofit.Constant;
+
 
 /**
  * Created by Anil on 12/3/2021.

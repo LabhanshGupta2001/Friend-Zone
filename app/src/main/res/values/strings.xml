@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name"> Social Media</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="home">Home</string>
     <string name="add">Add Post</string>
     <string name="continue_with_friendzone_to_connect_with_different_nfriends">Continue with FriendZone to connect with different \nFriends</string>
 
     <string name="chats">Chats</string>
     <string name="notification">Notification</string>
-    <string name="profile">Profile</string>
-    <string name="app_name">SawIT</string>
+
+
     <string name="ok">OK</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>

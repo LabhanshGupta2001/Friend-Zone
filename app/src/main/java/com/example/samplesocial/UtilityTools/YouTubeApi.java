@@ -10,29 +10,13 @@
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
- */
+ *//*
+
 
 package com.example.samplesocial.UtilityTools;
 
 import android.util.Log;
 
-import com.enwdtech.sawit.model.EventData;
-import com.google.api.client.util.DateTime;
-import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.YouTube.LiveBroadcasts.Transition;
-import com.google.api.services.youtube.model.CdnSettings;
-import com.google.api.services.youtube.model.IngestionInfo;
-import com.google.api.services.youtube.model.LiveBroadcast;
-import com.google.api.services.youtube.model.LiveBroadcastContentDetails;
-import com.google.api.services.youtube.model.LiveBroadcastListResponse;
-import com.google.api.services.youtube.model.LiveBroadcastSnippet;
-import com.google.api.services.youtube.model.LiveBroadcastStatus;
-import com.google.api.services.youtube.model.LiveStream;
-import com.google.api.services.youtube.model.LiveStreamListResponse;
-import com.google.api.services.youtube.model.LiveStreamSnippet;
-import com.google.api.services.youtube.model.MonitorStreamInfo;
-
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -123,7 +107,8 @@ public class YouTubeApi {
 
 
 
-        } /*catch (GoogleJsonResponseException e) {
+        } */
+/*catch (GoogleJsonResponseException e) {
             System.err.println("GoogleJsonResponseException code: "
                     + e.getDetails().getCode() + " : "
                     + e.getDetails().getMessage());
@@ -131,7 +116,8 @@ public class YouTubeApi {
 
           //  Utils.T(act, "" + e.getMessage());
 
-        }*/catch (Exception e){
+        }*//*
+catch (Exception e){
             imp.onFailed(e.getMessage());
             e.printStackTrace();
         }
@@ -245,3 +231,4 @@ public class YouTubeApi {
     }
 
 }
+*/

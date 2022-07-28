@@ -67,9 +67,11 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
     FirebaseDatabase firebaseDatabase;
     FirebaseStorage firebaseStorage;
 
+    String cover;
     String profile;
     private String Name;
     private String userid;
+    private boolean isCoverSelected = false;
 
     @Override
 
@@ -88,8 +90,6 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
         binding = FragmentProfile2Binding.inflate(getLayoutInflater(), container, false);
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
-
-
         myref = firebaseDatabase.getReference().child("Posts");
 
 
@@ -98,6 +98,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
         binding2 = UploadProfleBottomsheetBinding.inflate(getLayoutInflater());
         seeProfileBinding = SeeProfileBinding.inflate(getLayoutInflater());
 
+        binding.addCover.setOnClickListener(this);
         binding.ivLogout.setOnClickListener(this);
         binding.profileImage.setOnClickListener(this);
         binding.message.setOnClickListener(this);
@@ -106,9 +107,11 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
         Name = sharedPreferences.getString("name", "");
         userid = sharedPreferences.getString("userid", "");
         profile = sharedPreferences.getString("profile", "");
+        cover = sharedPreferences.getString("cover", "");
         if (!profile.equals("")) {
-            Picasso.get().load(profile).into(binding.profileImage);
+            Picasso.get().load(profile).error(R.drawable.dummy).into(binding.profileImage);
         }
+        Picasso.get().load(cover).error(R.drawable.dummy).into(binding.cover);
 
         binding.textView2.setText(Name);
         list = new ArrayList<>();
@@ -148,7 +151,13 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
     }
 
     private void botomSheetTaskSeeProfile() {
-        Picasso.get().load(profile).into(seeProfileBinding.image);
+        if (isCoverSelected) {
+            Picasso.get().load(cover).into(seeProfileBinding.image);
+
+        } else {
+
+            Picasso.get().load(profile).into(seeProfileBinding.image);
+        }
         bottomSheetDialog.setContentView(seeProfileBinding.getRoot());
         bottomSheetDialog.show();
 
@@ -157,7 +166,12 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == binding2.cvPost) {
-            UpdateProfile();
+            if (isCoverSelected) {
+                updateCover();
+            } else {
+                UpdateProfile();
+
+            }
         }
         if (view == binding.message) {
             Intent intent = new Intent(view.getContext(), YourPosts.class);
@@ -231,6 +245,47 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext()).setMessage("Are you sure you want to update profile?").setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    bottomSheeTask();
+                                }
+                            })
+                            .setNegativeButton("No", null);
+                    AlertDialog dialog = builder.create();
+
+                    //setting background to defauldt alert dailog
+
+                    dialog.getWindow().setBackgroundDrawable(getActivity().getDrawable(R.drawable.alert));
+                    dialog.show();
+                }
+            });
+            dialog.show();
+
+        }
+        if (view == binding.addCover) {
+            isCoverSelected = true;
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.MyDialogTheme);
+            // set the custom layout
+            AlertDailogBinding binding = AlertDailogBinding.inflate(getLayoutInflater());
+            builder.setView(binding.getRoot());
+            AlertDialog dialog = builder.create();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            binding.cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            binding.llViewProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    botomSheetTaskSeeProfile();
+                }
+            });
+            binding.llSelectProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext()).setMessage("Are you sure you want to update cover?").setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     bottomSheeTask();
@@ -352,6 +407,69 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
 
     }
 
+    void updateCover() {
+        binding2.progressBar.setVisibility(View.VISIBLE);
+
+        Drawable drawable = binding2.image.getDrawable();
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        StorageReference reference = firebaseStorage.getReference().child("UserCover").child(userid);
+        reference.putBytes(byteArray).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+
+                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+                        firebaseDatabase.getReference().child("users").child(userid).child("UserCover").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                Toast.makeText(getContext(), "Image Uploaed", Toast.LENGTH_SHORT).show();
+                                sharedPreferences = getActivity().getSharedPreferences("Detail", Context.MODE_PRIVATE);
+
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                editor.putString("cover", uri.toString());
+
+                                Picasso.get().load(uri).into(binding.cover);
+
+                                binding2.progressBar.setVisibility(View.GONE);
+
+                                bottomSheetDialog.dismiss();
+                                firebaseDatabase.getReference().child("Posts").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                            if (dataSnapshot.child("userId").getValue(String.class).equals(userid)) {
+                                                dataSnapshot.getRef().child("userProfile").setValue(uri.toString());
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+
+    }
+
     private void getPosts() {
 
         myref.addValueEventListener(new ValueEventListener() {
@@ -364,7 +482,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     if (dataSnapshot.child("userId").getValue(String.class).equals(userid)) {
                         UploadPostModel model = dataSnapshot.getValue(UploadPostModel.class);
-                        model.key=dataSnapshot.getKey();
+                        model.key = dataSnapshot.getKey();
                         arrayList.add(model);
                     }
                     com.example.samplesocial.Adapter.YourPosts dashboardAdapter = new com.example.samplesocial.Adapter.YourPosts(arrayList, getContext());

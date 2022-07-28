@@ -37,10 +37,12 @@
         android:id="@+id/readableBottomBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45mdp"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rbb_activeItemType="text"
+
         app:rbb_backgroundColor="@color/green"
         app:rbb_indicatorColor="@color/orange"
         app:rbb_tabs="@xml/nav_item"

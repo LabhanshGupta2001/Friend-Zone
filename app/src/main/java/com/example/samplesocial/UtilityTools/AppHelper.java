@@ -9,7 +9,8 @@ import android.net.Uri;
 
 import androidx.core.content.ContextCompat;
 
-import com.enwdtech.sawit.Retrofit.Constant;
+
+import com.example.samplesocial.Retrofit.Constant;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

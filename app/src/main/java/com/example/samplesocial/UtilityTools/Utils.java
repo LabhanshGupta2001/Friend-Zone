@@ -16,24 +16,25 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.MimeTypeMap;
-import android.webkit.ValueCallback;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
-import com.enwdtech.sawit.R;
-import com.enwdtech.sawit.Retrofit.Constant;
-import com.enwdtech.sawit.activity.LoginActivity;
-import com.enwdtech.sawit.database.UserDataHelper;
-import com.enwdtech.sawit.database.UserModel;
+import com.example.samplesocial.R;
+import com.example.samplesocial.Retrofit.Constant;
 import com.example.samplesocial.activity.LoginActivity;
 import com.example.samplesocial.database.UserDataHelper;
 import com.example.samplesocial.database.UserModel;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -110,6 +111,7 @@ public class Utils {
         // return the new list
         return newList;
     }
+
     public static String formatToYesterdayOrToday(String date) throws ParseException {
         Date dateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(date);
         Calendar calendar = Calendar.getInstance();
@@ -124,7 +126,7 @@ public class Utils {
         } else if (calendar.get(Calendar.YEAR) == yesterday.get(Calendar.YEAR) && calendar.get(Calendar.DAY_OF_YEAR) == yesterday.get(Calendar.DAY_OF_YEAR)) {
             return "Yesterday | " + timeFormatter.format(dateTime);
         } else {
-            return date.toString();
+            return date;
         }
     }
 
@@ -145,6 +147,7 @@ public class Utils {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(activity, color));
     }
+
     public static void UnAuthorizationToken(Context cx) {
         UserDataHelper.getInstance().deleteAll();
         I_clear(cx, LoginActivity.class, null);
@@ -173,11 +176,11 @@ public class Utils {
                 Utils.E("Key Hash=" + key);
             }
         } catch (PackageManager.NameNotFoundException e1) {
-            Utils.E("Name not found" + e1.toString());
+            Utils.E("Name not found" + e1);
         } catch (NoSuchAlgorithmException e) {
-            Utils.E("No such an algorithm" + e.toString());
+            Utils.E("No such an algorithm" + e);
         } catch (Exception e) {
-            Utils.E("Exception" + e.toString());
+            Utils.E("Exception" + e);
         }
 
         return key;
@@ -225,23 +228,16 @@ public class Utils {
             return DateFormat.format("MMM dd yyyy | h:mm aa", smsTime).toString();
         }
     }
+
     public static void logOutTwitch(Context c) {
 
-        CookieManager cookieManager=CookieManager.getInstance();
-        cookieManager.removeAllCookies(new ValueCallback<Boolean>() {
-            @Override
-            public void onReceiveValue(Boolean aBoolean) {
-                Utils.E("check ClearCookies::"+aBoolean);
-
-            }
-        });
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookies(aBoolean -> Utils.E("check ClearCookies::" + aBoolean));
 
 
     }
 
-
     public static Dialog initProgressDialog(Context c) {
-
         Dialog dialog = new Dialog(c);
         dialog.setCanceledOnTouchOutside(false);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -275,6 +271,31 @@ public class Utils {
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> dialogInterface.cancel());
         AlertDialog alertdialog = builder.create();
         alertdialog.show();
+    }
+
+    public static void setBottomSheetFullHeight(Activity activity, BottomSheetDialog bottomSheetDialog) {
+        setupFullHeight(bottomSheetDialog, activity);
+
+    }
+
+    private static void setupFullHeight(BottomSheetDialog bottomSheetDialog, Activity activity) {
+        FrameLayout bottomSheet = (FrameLayout) bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+        ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
+
+        int windowHeight = getWindowHeight(activity);
+        if (layoutParams != null) {
+            layoutParams.height = windowHeight;
+        }
+        bottomSheet.setLayoutParams(layoutParams);
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    private static int getWindowHeight(Activity activity) {
+        // Calculate window height for fullscreen use
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        (activity).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
     }
 
     public static void setLanguage(String language, Context context) {

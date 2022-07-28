@@ -1,4 +1,4 @@
-package com.example.samplesocial.UtilityTools;
+package com.enwdtech.sawit.UtilityTools;
 
 import android.content.Context;
 import android.text.format.DateFormat;
@@ -16,10 +16,14 @@ import java.util.TimeZone;
 
 public class TimeFormatter {
     @NonNull
-    public static String timeAgo(String date, Context context, String Pattern) throws ParseException {
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat(Pattern, Locale.getDefault());
-        dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date time_ago = dateFormat1.parse(date);
+    public static String timeAgo(String date, String Pattern) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat(Pattern, Locale.ENGLISH);
+        Date time_ago = null;
+        try {
+            time_ago = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         long currenttime = System.currentTimeMillis();
         long diff = currenttime - time_ago.getTime();
         long diffSeconds = diff / 1000;
@@ -29,9 +33,9 @@ public class TimeFormatter {
         String time = null;
         if (diffDays > 0) {
             if (diffDays == 1) {
-                time = diffDays + " day ago ";
+                time = diffDays + " d ago ";
             } else if (diffDays <= 7) {
-                time = diffDays + " days ago ";
+                time = diffDays + " d ago ";
             } else {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd,yyyy");
                 time = dateFormat.format(time_ago);
@@ -39,22 +43,22 @@ public class TimeFormatter {
         } else {
             if (diffHours > 0) {
                 if (diffHours == 1) {
-                    time = diffHours + " hr ago";
+                    time = diffHours + " h ago";
                 } else {
-                    time = diffHours + " hrs ago";
+                    time = diffHours + " h ago";
                 }
             } else {
                 if (diffMinutes > 0) {
                     if (diffMinutes == 1) {
-                        time = diffMinutes + " min ago";
+                        time = diffMinutes + " m ago";
                     } else {
-                        time = diffMinutes + " mins ago";
+                        time = diffMinutes + " m ago";
                     }
                 } else {
                     if (diffSeconds <= 0) {
                         time = "Now";
                     } else {
-                        time = diffSeconds + " sec ago";
+                        time = diffSeconds + " s ago";
                     }
                 }
 
@@ -63,11 +67,9 @@ public class TimeFormatter {
         }
         return time;
     }
+
     @NonNull
-    public static String TimeAgo(String date, Context context, String Pattern) throws ParseException {
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat(Pattern, Locale.getDefault());
-        dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date time_ago = dateFormat1.parse(date);
+    public static String timeAgo(Date time_ago) {
         long currenttime = System.currentTimeMillis();
         long diff = currenttime - time_ago.getTime();
         long diffSeconds = diff / 1000;
@@ -76,21 +78,38 @@ public class TimeFormatter {
         long diffDays = diff / (24 * 60 * 60 * 1000);
         String time = null;
         if (diffDays > 0) {
-            time = diffDays + "D";
+            if (diffDays == 1) {
+                time = diffDays + " d ago ";
+            } else if (diffDays <= 7) {
+                time = diffDays + " d ago ";
+            } else {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd,yyyy");
+                time = dateFormat.format(time_ago);
+            }
         } else {
             if (diffHours > 0) {
-                time = diffHours + "H";
+                if (diffHours == 1) {
+                    time = diffHours + " h ago";
+                } else {
+                    time = diffHours + " h ago";
+                }
             } else {
                 if (diffMinutes > 0) {
-                    time = diffMinutes + "M";
+                    if (diffMinutes == 1) {
+                        time = diffMinutes + " m ago";
+                    } else {
+                        time = diffMinutes + " m ago";
+                    }
                 } else {
                     if (diffSeconds <= 0) {
                         time = "Now";
                     } else {
-                        time = diffSeconds + "S";
+                        time = diffSeconds + " s ago";
                     }
                 }
+
             }
+
         }
         return time;
     }
@@ -110,7 +129,7 @@ public class TimeFormatter {
         final String dateTimeFormatString = "EEE, MMM d | h:mm aa";
         final long HOURS = 60 * 60 * 60;
         if (now.get(Calendar.DATE) == smsTime.get(Calendar.DATE)) {
-            return "Today"+ " " + DateFormat.format(timeFormatString, smsTime);
+            return "Today" + " " + DateFormat.format(timeFormatString, smsTime);
         } else if (now.get(Calendar.DATE) - smsTime.get(Calendar.DATE) == 1) {
             return "Yesterday" + " " + DateFormat.format(timeFormatString, smsTime);
         } else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
@@ -127,21 +146,22 @@ public class TimeFormatter {
 
         Calendar smsTime = Calendar.getInstance();
         smsTime.setTimeInMillis(date1.getTime());
-        if(For.equals("Date")){
+        if (For.equals("Date")) {
             return DateFormat.format("dd MMM yyyy", smsTime).toString();
-        }else {
+        } else {
             return DateFormat.format("h:mm:ss aa", smsTime).toString();
         }
 
     }
-    public static String changeDateFormat(String currentFormat,String requiredFormat,String dateString){
-        String result="";
-        if (Strings.isEmptyOrWhitespace(dateString)){
+
+    public static String changeDateFormat(String currentFormat, String requiredFormat, String dateString) {
+        String result = "";
+        if (Strings.isEmptyOrWhitespace(dateString)) {
             return result;
         }
         SimpleDateFormat formatterOld = new SimpleDateFormat(currentFormat, Locale.getDefault());
         SimpleDateFormat formatterNew = new SimpleDateFormat(requiredFormat, Locale.getDefault());
-        Date date=null;
+        Date date = null;
         try {
             date = formatterOld.parse(dateString);
         } catch (ParseException e) {
